@@ -105,7 +105,7 @@ function App() {
 
   const openNotification = (id: string) => {
     notification.info({
-      message: `Parameter width id ${id} updated`,
+      message: `Parameter with id ${id} updated`,
     });
   };
 
