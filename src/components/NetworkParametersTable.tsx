@@ -1,8 +1,10 @@
-import { Card, Table } from "antd";
-import * as math from "mathjs";
-import { NetworkParameters } from "../domain/networkParameters";
+import { InfoCircleOutlined } from "@ant-design/icons";
+import { Button, Card, Table, Tooltip, Typography } from "antd";
+import { ColumnsType } from "antd/lib/table";
 
-const columns = [
+const { Text } = Typography;
+
+const columns: ColumnsType<any> = [
   {
     title: "ID",
     dataIndex: "id",
@@ -17,6 +19,18 @@ const columns = [
     title: "Current value",
     dataIndex: "value",
     key: "value",
+    render: (data: number, item: any) => {
+      if (item.isUpdated) {
+        return (
+          <Tooltip title={`This value is updated for ${item.updatedValue}`}>
+            <Text mark>
+              {data} <InfoCircleOutlined />
+            </Text>
+          </Tooltip>
+        );
+      }
+      return data;
+    },
   },
   {
     title: "Step",
@@ -41,55 +55,21 @@ const columns = [
 ];
 
 interface Props {
-  data: NetworkParameters;
-  defaultParams: (
-    | {
-        key: string;
-        id: string;
-        title: string;
-        default: number;
-        step: number;
-        min: number;
-        max: number;
-      }
-    | {
-        key: string;
-        id: string;
-        title: string;
-        default: number;
-        min: number;
-        max: number;
-        step?: undefined;
-      }
-  )[];
+  tableData: any;
+  resetStateToDefault: () => void;
 }
 
-const getStepByKey = (key: keyof NetworkParameters, value: number) => {
-  if (key === "storageFeeFactor") {
-    return 25000;
-  }
-
-  if (key === "minValuePerByte") {
-    return 10;
-  }
-
-  if (key === "blockVersion") {
-    return null;
-  }
-
-  return Math.max(math.evaluate(`${value}/100`), 1);
-};
-
-const NetworkParametersTable = ({ data, defaultParams }: Props) => {
-  const transformData = defaultParams.map((item) => ({
-    ...item,
-    step: getStepByKey(item.key as keyof NetworkParameters, data[item.key as keyof NetworkParameters]),
-    value: data[item.key as keyof NetworkParameters],
-  }));
-
+const NetworkParametersTable = ({ tableData, resetStateToDefault }: Props) => {
   return (
-    <Card>
-      <Table dataSource={transformData} columns={columns} pagination={false} />
+    <Card
+      title={<Typography.Title level={2}>Network parameters</Typography.Title>}
+      extra={
+        <Button type="primary" onClick={resetStateToDefault}>
+          Reset state
+        </Button>
+      }
+    >
+      <Table dataSource={Object.values(tableData) as any} columns={columns} pagination={false} />
     </Card>
   );
 };

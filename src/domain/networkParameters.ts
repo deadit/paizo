@@ -4,7 +4,6 @@ export interface NetworkParameters {
   minValuePerByte: number;
   maxBlockSize: number;
   maxBlockCost: number;
-  blockVersion: number;
   tokenAccessCost: number;
   inputCost: number;
   dataInputCost: number;

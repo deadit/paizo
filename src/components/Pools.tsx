@@ -1,10 +1,11 @@
-import { Alert, Button, Card, Input, Space } from "antd";
+import { Alert, Button, Card, Input, Space, Tooltip } from "antd";
 import Text from "antd/lib/typography/Text";
 import Title from "antd/lib/typography/Title";
 
 type Props = {
   poolsData: any;
   setPoolsData: any;
+  parameters: any;
 };
 
 const poolValidation = (value1: number, value2: number, value3: number) => {
@@ -17,7 +18,17 @@ const poolValidation = (value1: number, value2: number, value3: number) => {
   }
 };
 
-const Pools = ({ poolsData, setPoolsData }: Props) => {
+const getTextForParameter = (parameters: any, idParameter: any) => {
+  if (idParameter === 0) {
+    return 0;
+  }
+  const parameter: any = Object.values(parameters).find(
+    (parameter: any) => Number(parameter.id) === Math.abs(idParameter)
+  );
+  return <Tooltip title={`You will update "${parameter.title}" for ${parameter.step}`}>{idParameter}</Tooltip>;
+};
+
+const Pools = ({ poolsData, setPoolsData, parameters }: Props) => {
   const updateValue = (
     index: number,
     valueKey: "value1" | "value2" | "value3",
@@ -71,7 +82,7 @@ const Pools = ({ poolsData, setPoolsData }: Props) => {
                 <Button onClick={() => updateValue(i, "value1", "decrease", value1)} disabled={value1 === -8}>
                   -
                 </Button>
-                {value1}
+                {getTextForParameter(parameters, value1)}
                 <Button onClick={() => updateValue(i, "value1", "increase", value1)} disabled={value1 === 120}>
                   +
                 </Button>
@@ -80,7 +91,7 @@ const Pools = ({ poolsData, setPoolsData }: Props) => {
                 <Button onClick={() => updateValue(i, "value2", "decrease", value2)} disabled={value2 === -8}>
                   -
                 </Button>
-                {value2}
+                {getTextForParameter(parameters, value2)}
                 <Button onClick={() => updateValue(i, "value2", "increase", value2)} disabled={value2 === 120}>
                   +
                 </Button>
@@ -89,7 +100,7 @@ const Pools = ({ poolsData, setPoolsData }: Props) => {
                 <Button onClick={() => updateValue(i, "value3", "decrease", value3)} disabled={value3 === -8}>
                   -
                 </Button>
-                {value3}
+                {getTextForParameter(parameters, value3)}
                 <Button onClick={() => updateValue(i, "value3", "increase", value3)} disabled={value3 === 120}>
                   +
                 </Button>
@@ -102,6 +113,7 @@ const Pools = ({ poolsData, setPoolsData }: Props) => {
                   type="number"
                   onChange={(event) => updateHashrate(i, event.currentTarget.value)}
                   value={hashrateValue}
+                  suffix={measure}
                 />
               </Space>
             </Space>
