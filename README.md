@@ -6,7 +6,7 @@ Goal: Create a playground for miners and users to learn and understand miner gov
 
 **Team members**
 
-**Noah (@NoahErgo)**: Project idea, visual mockups, execution feedback 
+**Noah (@NoahErgo)**: Project idea, visual mockups, execution feedback  
 **Dmitry Usov (@deadit)**: Development, idea streamlining, implementation
 
 ___ 
