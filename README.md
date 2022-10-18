@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# Ergohack V Submission: Paizo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+παίζω | Simplified transliteration: paizo | Definition: to play in the manner of children
 
-## Available Scripts
+Goal: Create a playground for miners and users to learn and understand miner governance on Ergo.
 
-In the project directory, you can run:
+**Team members**
 
-### `npm start`
+**Noah (@NoahErgo)**: Project idea, visual mockups, execution feedback 
+**Dmitry Usov (@deadit)**: Development, idea streamlining, implementation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+___ 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Background
 
-### `npm test`
+For Ergohack V, Dmitry and Noah teamed up to execute an idea that Noah had after the mining difficulty adjustment situation last month. Noah saw that many miners did not understand the role of on-chain governance on Ergo. Noah even saw some miner influencers ask where the discord vote was, so they could vote on the hard fork.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+It was clear that we as a community need something to better educate miners about governance parameters so they can be more informed about their role as stewards of the blockchain.
 
-### `npm run build`
+So for Ergohack we have put together a governance simulator inspired by the [SigmaUSD Playground by ABChris](https://sigusd.abchris.xyz/) (creator of [ergo.watch](https://ergo.watch/)).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Noah is not a developer so Noah created mockups and descriptions of the ideas Noah had based on the [governance documentation](https://docs.ergoplatform.com/mining/governance/) which we have also included in our project demo. Dmitry took my ideas and mockups and created the demo with iterative feedback.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Initial mockup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<img width="609" alt="image" src="https://user-images.githubusercontent.com/26635501/196411057-653ea2ad-f9b0-4e9d-8e20-6b9d9b567234.png">
+First mockup Noah created in figma and presented to Dmitry to present my idea
 
-### `npm run eject`
+Basic idea was to have a table with all of the parameters that gets info from the current network state and will show updated information as the epoch simulation is run.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+There are several pools that the user can select which parameters they want to propose a change and vote for.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+As you can see, the basic structure of the mockup has been achieved in the working app. Dmitry vastly improved the network parameter table that Noah initially presented. Dmitry has also added a section to try to better explain the governance process.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+There are still some features that are missing from the mockup that did not make it into our MVP such as variable hashrate (choosing from H/s, MH/s, TH/s, etc.), floating tooltips on parameter IDs to communicate more information, and percentages to show which pools voted for which parameters.
